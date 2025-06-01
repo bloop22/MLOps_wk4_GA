@@ -45,7 +45,7 @@ print_step "Running the model training script (first version)..."
 python main.py  # Model saved as model.joblib
 
 print_step "Adding model.joblib to DVC tracking..."
-dvc add model.joblib #> /dev/null
+dvc add model.joblib > /dev/null
 git add model.joblib.dvc .gitignore
 
 print_step "Committing first model version to Git..."
@@ -57,7 +57,7 @@ python modifyData.py
 python main.py
 
 print_step "Re-adding updated iris.csv and model.joblib to DVC..."
-dvc add model.joblib iris.csv #> /dev/null
+dvc add model.joblib iris.csv > /dev/null
 git add model.joblib.dvc iris.csv.dvc .gitignore
 
 print_step "Committing second model version to Git..."
@@ -73,6 +73,7 @@ wc -l iris.csv
 
 print_step "Checking out version v2.0..."
 git checkout v2.0
+dvc checkout
 
 print_step "Row count in iris.csv at v2.0:"
 wc -l iris.csv
