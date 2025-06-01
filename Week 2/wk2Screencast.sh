@@ -38,7 +38,7 @@ print_step "Initializing DVC in the project..."
 dvc init > /dev/null
 
 print_step "Adding iris.csv to DVC tracking..."
-dvc add iris.csv #> /dev/null
+dvc add iris.csv > /dev/null
 git add iris.csv.dvc .gitignore
 
 print_step "Running the model training script (first version)..."
