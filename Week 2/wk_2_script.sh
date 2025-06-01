@@ -74,6 +74,6 @@ echo "Showing DVC differences between v1.0 and v2.0 (JSON output)..."
 dvc diff v1.0 v2.0 --json
 
 echo "Showing detailed DVC diff with explanations..."
-dvc diff v1.0 v2.0 --json --show
+dvc diff v1.0 v2.0 --json --show-hash
 
 echo "✅ Script complete."
