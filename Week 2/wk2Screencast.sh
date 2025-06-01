@@ -30,7 +30,7 @@ print_step "Setting up Python virtual environment..."
 python3 -m venv .venv
 source .venv/bin/activate
 
-print_step "Installing required Python packages (silently)..."
+print_step "Installing required Python packages..."
 pip install -r requirements.txt > /dev/null
 pip install dvc > /dev/null
 
