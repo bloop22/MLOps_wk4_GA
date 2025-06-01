@@ -1,14 +1,19 @@
 #!/bin/bash
 
-echo "Cloning the repository..."
-git clone https://github.com/bloop22/MLOps.git
+#echo "Cloning the repository..."
+# git clone https://github.com/bloop22/MLOps.git
 
-echo "Navigating to Week 2 directory..."
-cd MLOps
-cd "Week 2"
+# echo "Navigating to Week 2 directory..."
+# cd MLOps
+# cd "Week 2"
 
 echo "Initializing Git..."
 git init
+
+#Configure git user
+git config --global user.email "presthahooda@gmail.com"
+git config --global user.name "pre"
+
 
 echo "Setting up Python virtual environment..."
 python3 -m venv .venv
