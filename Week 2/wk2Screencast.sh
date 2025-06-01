@@ -23,8 +23,8 @@ print_step "Initializing Git..."
 git init
 
 print_step "Configuring Git user..."
-git config --global user.email "p@gmail.com"
-git config --global user.name "p"
+git config --global user.email "presthahooda@gmail.com"
+git config --global user.name "pre"
 
 print_step "Setting up Python virtual environment..."
 python3 -m venv .venv
