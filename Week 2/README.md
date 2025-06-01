@@ -4,7 +4,7 @@ This project demonstrates how to use **Git** and **DVC (Data Version Control)** 
 
 ---
 
-## 📁 Files and Their Utility
+## Files and Their Utility
 
 ### `iris.csv`
 - The base dataset used for training.
