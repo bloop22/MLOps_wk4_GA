@@ -1,0 +1,43 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Iris Sanity Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.9"
+    - name: Set up CML 
+      uses: iterative/setup-cml@v2
+    - name: Install dependencies and run unit tests
+      run: |
+        pip install -r requirements.txt
+        python -m unittest test.py 2>&1 | tee test_output.txt
+    - name: Create CML report
+      env: 
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+          echo "## Unit Test Output" > report.md
+          echo '```' >> report.md
+          cat test_output.txt >> report.md
+          echo '```' >> report.md
+        
+          cml comment create --publish report.md
+    
