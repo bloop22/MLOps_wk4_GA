@@ -4,8 +4,8 @@ import joblib
 import os
 
 class TestIrisModel(unittest.TestCase):
-    model_path = "model.joblib"
-    sample_path = "samples/sample1.csv"
+    model_path = "Week 2/model.joblib"
+    sample_path = "Week 2/samples/sample1.csv"
     model = None
 
     def setUp(self):
