@@ -6,7 +6,7 @@ from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn import metrics
 import joblib
 
-data = pd.read_csv('iris.csv')
+data = pd.read_csv('data/iris.csv')
 
 train, test = train_test_split(data, test_size = 0.4, stratify = data['species'], random_state = 42)
 X_train = train[['sepal_length','sepal_width','petal_length','petal_width']]
