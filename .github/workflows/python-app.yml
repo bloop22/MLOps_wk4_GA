@@ -28,7 +28,7 @@ jobs:
       uses: iterative/setup-cml@v2
     - name: Install dependencies and run unit tests
       run: |
-        pip install -r requirements.txt
+        pip install -r "Week 2/requirements.txt"
         python -m unittest test.py 2>&1 | tee test_output.txt
     - name: Create CML report
       env: 
