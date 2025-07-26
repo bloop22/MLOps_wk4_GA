@@ -1,5 +1,5 @@
-# MLOps Wk 4
-## Files Overview
+# MLOps Wk 6
+## CI/CD Pipeline
 
 - **train.py**: Trains a Decision Tree classifier on the Iris dataset and saves the model to `model.joblib`.
 - **test.py**: Contains unittests to:
