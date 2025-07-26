@@ -27,7 +27,8 @@ jobs:
         with:
           project_id: helical-canto-459816-r4
           service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-          install_components: gke-gcloud-auth-plugin
+          export_default_credentials: true
+          install_components: 'gke-gcloud-auth-plugin'
 
 
       - name: Set up CML 
