@@ -7,7 +7,7 @@ import pandas as pd
 app = FastAPI(title="Iris Classifier API")
 
 # Load model
-model = joblib.load("../model.joblib")
+model = joblib.load("model.joblib")
 
 # Input schema
 class IrisInput(BaseModel):
