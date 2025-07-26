@@ -1,0 +1,11 @@
+#testing github actions
+
+# setup fastapi
+uvicorn fastapi_iris:app --reload --host 0.0.0.0
+
+#
+build -t iris-api .
+docker run -d -p 8200:8200 iris-api
+
+#setup kubernetes
+gcloud container clusters get-credentials demo-gke-iris-cluster --zone us-central1 --project helical-canto-459816-r4
