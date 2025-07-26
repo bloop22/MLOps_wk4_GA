@@ -22,13 +22,12 @@ jobs:
         with:
           python-version: "3.10"
           
-      - name: Authenticate to Google Cloud
-        run: |
-          echo "$GCP_SERVICE_ACCOUNT_KEY" > gcp-key.json
-          export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/gcp-key.json
-          gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
-        env:
-          GCP_SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+      - name: Authenticate to Google Cloud and set up GKE
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: helical-canto-459816-r4
+          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+          install_components: gke-gcloud-auth-plugin
 
 
       - name: Set up CML 
@@ -53,18 +52,18 @@ jobs:
       - name: Configure Docker for Artifact Registry
         run: gcloud auth configure-docker us-central1-docker.pkg.dev
 
-      - name: Print current directory and contents
-        run: |
-          pwd
-          ls -R
+      # - name: Print current directory and contents
+      #   run: |
+      #     pwd
+      #     ls -R
 
       - name: Build Docker Image
         run: |
           docker build -t us-central1-docker.pkg.dev/helical-canto-459816-r4/my-repo/iris-api:latest "Week 2/docker_demo"
 
-      - name: Install GKE auth plugin
-        run: |
-          gcloud components install gke-gcloud-auth-plugin --quiet
+      # - name: Install GKE auth plugin
+      #   run: |
+      #     gcloud components install gke-gcloud-auth-plugin --quiet
 
 
       - name: Push Docker Image to Artifact Registry
