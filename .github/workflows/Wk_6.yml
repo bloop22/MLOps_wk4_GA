@@ -39,7 +39,7 @@ jobs:
         
       - name: Install dependencies and run unit tests
         run: |
-          pip install -r "Week 2/requirements.txt"
+          pip install -qq -r "Week 2/requirements.txt"
           python -m unittest "Week 2/test.py" 2>&1 | tee test_output.txt
         
       - name: Create CML report
@@ -56,19 +56,9 @@ jobs:
       - name: Configure Docker for Artifact Registry
         run: gcloud auth configure-docker us-central1-docker.pkg.dev
 
-      # - name: Print current directory and contents
-      #   run: |
-      #     pwd
-      #     ls -R
-
       - name: Build Docker Image
         run: |
           docker build -t us-central1-docker.pkg.dev/helical-canto-459816-r4/my-repo/iris-api:latest "Week 2/docker_demo"
-
-      # - name: Install GKE auth plugin
-      #   run: |
-      #     gcloud components install gke-gcloud-auth-plugin --quiet
-
 
       - name: Push Docker Image to Artifact Registry
         run: |
@@ -85,3 +75,20 @@ jobs:
       - name: Deploy latest image to GKE
         run: |
           kubectl set image deployment/demo-iris-workload iris-api-sha256-1=us-central1-docker.pkg.dev/helical-canto-459816-r4/my-repo/iris-api:latest
+
+      - name: Docker Image Deployed to GKE cluster
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          EXTERNAL_IP=$(kubectl get service demo-iris-workload-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+          echo "CD completed." > cd_comment.md
+
+          if [ -n "$EXTERNAL_IP" ]; then
+            echo "Application is accessible at: http://$EXTERNAL_IP" >> cd_comment.md
+          else
+            echo "Service IP not available yet." >> cd_comment.md
+          fi
+
+          
+          cml comment create --publish cd_comment.md
+
