@@ -22,12 +22,15 @@ jobs:
         with:
           python-version: "3.10"
           
-      - name: Authenticate to Google Cloud and set up GKE
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: '${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}'
+
+      - name: Set up gcloud CLI
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: helical-canto-459816-r4
-          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-          export_default_credentials: true
           install_components: 'gke-gcloud-auth-plugin'
 
 
