@@ -2,3 +2,7 @@
 
 # setup fastapi
 uvicorn fastapi_iris:app --reload --host 0.0.0.0
+
+#
+build -t iris-api .
+docker run -d -p 8200:8200 iris-api
