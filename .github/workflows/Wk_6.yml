@@ -40,7 +40,7 @@ jobs:
       - name: Install dependencies and run unit tests
         run: |
           pip install -qq -r "Week 2/requirements.txt"
-          python -m unittest "Week 2/test.py" 2>&1 | tee test_output.txt
+          python -W ignore -m unittest "Week 2/test.py" 2>&1 | tee test_output.txt
         
       - name: Create CML report
         env: 
