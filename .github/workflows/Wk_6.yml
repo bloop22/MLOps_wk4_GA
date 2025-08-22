@@ -25,12 +25,12 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
         with:
-          credentials_json: '${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}'
+          credentials_json: '${{ secrets.NEW_GCP_SERVICE_ACCOUNT_KEY }}'
 
       - name: Set up gcloud CLI
         uses: google-github-actions/setup-gcloud@v2
         with:
-          project_id: helical-canto-459816-r4
+          project_id: articulate-ego-469619-v3
           install_components: 'gke-gcloud-auth-plugin'
 
 
@@ -58,11 +58,11 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t us-central1-docker.pkg.dev/helical-canto-459816-r4/my-repo/iris-api:latest "Week 2/docker_demo"
+          docker build -t us-central1-docker.pkg.dev/articulate-ego-469619-v3/my-repo/iris-api "Week 2/docker_demo"
 
       - name: Push Docker Image to Artifact Registry
         run: |
-          docker push us-central1-docker.pkg.dev/helical-canto-459816-r4/my-repo/iris-api:latest
+          docker push us-central1-docker.pkg.dev/articulate-ego-469619-v3/my-repo/iris-api:latest
 
       - name: Set up kubectl
         uses: azure/setup-kubectl@v3
@@ -71,11 +71,10 @@ jobs:
         run: |
           gcloud container clusters get-credentials demo-gke-iris-cluster \
             --zone us-central1 \
-            --project helical-canto-459816-r4
+            --project articulate-ego-469619-v3
       - name: Deploy latest image to GKE
         run: |
-          kubectl set image deployment/demo-iris-workload iris-api-sha256-1=us-central1-docker.pkg.dev/helical-canto-459816-r4/my-repo/iris-api:latest
-
+          kubectl set image deployment/demo-iris-workload iris-api-sha256-1=us-central1-docker.pkg.dev/articulate-ego-469619-v3/my-repo/iris-api:latest
       - name: Docker Image Deployed to GKE cluster
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
